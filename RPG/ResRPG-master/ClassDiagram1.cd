@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ResRPG.Program">
+    <Position X="1.25" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="ResRPG.Program.E_TEM" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Program.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAFwAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextRPG.Item">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="TextRPG.Item.E_ITEM_CATEGORY" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RPG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAAAAIAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAQAA=</HashCode>
+      <FileName>RPG.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextRPG.Player">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="TextRPG.Player.E_EQUMENT_TYPE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RPG.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BABAAAAAAQAEQgAAwBAAAQBBIIAAgJAwAEAIAAAEQgA=</HashCode>
+      <FileName>RPG.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TextRPG.RPG">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>RPG.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>
