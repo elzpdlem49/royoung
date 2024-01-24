@@ -140,20 +140,111 @@ void DequeMain()
 //문자열뒤집기 -> 문자배열 -> apple -> elppa
 void StackMain()
 {
+	stack<int> container; // stack 객체 생성
 
+	container.push(10); // 스택에 데이터 추가
+	cout << "Print:";
+	while (!container.empty()) // 스택이 비어있지 않은 동안 반복
+	{
+		cout << "[" << container.top() << "]"; // 스택의 맨 위 원소 출력
+		container.pop(); // 스택의 맨 위 원소 제거
+	}
+	cout << endl;
+
+	// 위에서 스택이 비어져서 다시 데이터를 추가
+	container.push(10);
+
+	// 스택의 크기를 3으로 조절하려면 직접 구현이 필요
+	// stack은 동적으로 크기를 조절하는 것이 불가능함
+
+	// 데이터 추가
+	container.push(20);
+
+	// 데이터 삽입은 스택 맨 위에만 가능하므로 insert 사용 불가
+
+	// 스택의 상태 출력
+	cout << "Print:";
+	while (!container.empty())
+	{
+		cout << "[" << container.top() << "]";
+		container.pop();
+	}
+	cout << endl;
+
+	// 스택 내의 모든 데이터 삭제 (clear 함수가 없으므로 pop을 이용)
+	while (!container.empty())
+	{
+		container.pop();
+	}
+	cout << "Clear:";
+	while (!container.empty())
+	{
+		cout << "[" << container.top() << "]";
+		container.pop();
+	}
+	cout << endl;
 }
 //큐: 뒤에서 추가하고 앞에서 꺼냄.
 //메세지큐: 이벤트가 발생한 순서대로 저장하는 공간.
 //입력된 순서대로 명령어 처리하기
 void QueueMain()
 {
+	queue<int> container;//컨테이너생성시 크기를 지정가능하다.
 
+	//1.추가 2.삽입 3.삭제 4.모두삭제
+	//1. 추가
+	container.push(10);
+	cout << "Size: " << container.size() << endl;
+	cout << "Front: " << container.front() << endl;
+
+	//2. 삽입
+	container.push(20);
+	cout << "Size: " << container.size() << endl;
+	cout << "Front: " << container.front() << endl;
+
+	//3. 삭제
+	container.pop();
+	cout << "Size: " << container.size() << endl;
+	cout << "Front: " << container.front() << endl;
+
+	//4. 모두삭제
+	while (!container.empty())
+	{
+		container.pop();
+	}
+	cout << "Clear:";
+	cout << endl;
 }
 //우선순위큐: 우선순위가 높은 원소가 먼저나감(힙)
 //무작위로 데이터를 넣었을때 어떤 순서대로 데이터가 나오는가? 큰값부터 나온다.
 void PriorytyQueueMain()
 {
+	priority_queue<int> container;//컨테이너생성시 크기를 지정가능하다.
 
+	//1.추가 2.삽입 3.삭제 4.모두삭제
+	//1. 추가
+	container.push(10);
+	container.push(30);
+	cout << "Size: " << container.size() << endl;
+	cout << "Top: " << container.top() << endl;
+
+	//2. 삽입
+	container.push(20);
+	cout << "Size: " << container.size() << endl;
+	cout << "Top: " << container.top() << endl;
+
+	//3. 삭제
+	container.pop();
+	cout << "Size: " << container.size() << endl;
+	cout << "Top: " << container.top() << endl;
+
+	//4. 모두삭제
+	while (!container.empty())
+	{
+		container.pop();
+	}
+	cout << "Clear:";
+	cout << endl;
 }
 //맵: 사전식으로 데이터를 찾을수있다.
 //해당영어단어를 넣으면 한국어 결과가 나온다.
@@ -201,12 +292,13 @@ void HashMapMain()
 }
 void main()
 {
-	VectorMain();
-	ListMain();
-	DequeMain();
+	//VectorMain();
+	//ListMain();
+	//DequeMain();
 	//StackMain();
 	//QueueMain();
-	//PriorytyQueueMain();
-	//MapMain();
-	//SetMain();
+	PriorytyQueueMain();
+	MapMain();
+	SetMain();
+	HashMapMain();
 }

@@ -11,20 +11,19 @@
 #include <crtdbg.h> //메모리 누수 탐지 헤더
 //#include  "linkedlistClass.h"
 
-struct SNode {
+struct CNode {
 	int nData;
-	SNode* pNext;
-	SNode* pLast;
+	CNode* pNext;
 };
 
-SNode* CreateNode(SNode* pLast, int data); //노드를 생성하여 리턴한다.
-SNode* FindNodeData(SNode* pStart, int data); //해당 데이터를 가진 노드를 찾는다.
-SNode* InsertNodeData(SNode* pStart, int data, int insert); //해당 데이터를 가진 노드 뒤에 노드를 추가한다.
-void DeleteNodeData(SNode* pStart, int del); //해당데이터를 가진 노드를 삭제한다.
-void PrintLinkedList(SNode* pStart); //노드를 순회하며 끝날때까지 출력한다.
-void DeleteLinkedList(SNode* pStart); //노드를 순회하며 모든데이터를 삭제한다.
-void ReverseLinkedList(SNode* pStart); //
-
+CNode* CreateNode(CNode* pNode, int data); //노드를 생성하여 리턴한다.
+CNode* FindNodeData(CNode* pStart, int data); //해당 데이터를 가진 노드를 찾는다.
+CNode* InsertNodeData(CNode* pStart, int data, int insert); //해당 데이터를 가진 노드 뒤에 노드를 추가한다.
+void DeleteNodeData(CNode* pStart, int del); //해당데이터를 가진 노드를 삭제한다.
+void PrintLinkedList(CNode* pStart); //노드를 순회하며 끝날때까지 출력한다.
+void DeleteLinkedList(CNode* pStart); //노드를 순회하며 모든데이터를 삭제한다.
+void ReverseLinkedList(CNode* pStart); //
+void CircularLinkedList(CNode* pStart);
 //연결리스트 동적으로 입력받기.(동적할당 설명용)
 void InputAdd();
 
@@ -37,8 +36,8 @@ void main()
 	//_CrtSetBreakAlloc(71); //메모리 누수시 번호를 넣으면 할당하는 위치에 브레이크 포인트를 건다.
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); //메모리 누수 검사 
 
-	SNode* pBegin = NULL;
-	SNode* pEnd = NULL;
+	CNode* pBegin = NULL;
+	CNode* pEnd = NULL;
 
 	//노드 추가 테스트
 	pEnd = CreateNode(pEnd, 10);
@@ -49,19 +48,15 @@ void main()
 	pEnd = CreateNode(pEnd, 40);
 	pEnd = CreateNode(pEnd, 50);
 
-	if (pEnd != NULL)
-	{
-		pEnd->pNext = pBegin;
-		pBegin->pLast = pEnd;
-	}
+	//CircularLinkedList(pBegin);
 
 	PrintLinkedList(pBegin);
 
-	SNode* pFind = FindNodeData(pBegin, 40);
+	CNode* pFind = FindNodeData(pBegin, 40);
 	if (pFind != NULL)
 		printf("Find:%d\n", pFind->nData);
 
-	SNode* pInsert = InsertNodeData(pBegin, 30, 60);//노드 삽입
+	CNode* pInsert = InsertNodeData(pBegin, 30, 60);//노드 삽입
 	if (pInsert != NULL)
 		printf("Insert:%d\n", pInsert->nData);
 
@@ -76,26 +71,27 @@ void main()
 
 //여기서 부터 기능을 구현한다.
 //기존코드는 손대지말고, 추가만 하여 현 프로그램 정상 작동하도록할것.
-SNode* CreateNode(SNode* pLast, int data)
+CNode* CreateNode(CNode* pNode, int data)
 {
-	//SNode* pTemp = NULL;
-
-	SNode* pTemp = new SNode();
+	CNode* pTemp = new CNode();
 	pTemp->nData = data;
-	pTemp->pNext = pLast;
 
-	if (pLast != NULL)
+	if (pNode == NULL)
 	{
-		pLast = pTemp;
-		pTemp->pLast = pLast;
+		pTemp->pNext = pTemp;
 	}
-
-	return pTemp;
+	else
+	{
+		// 마지막 노드가 새로운 노드를 가리키고, 새로운 노드는 첫 번째 노드를 가리킴
+		pTemp->pNext = pNode->pNext;
+		pNode->pNext = pTemp;
+	}
+	return  pTemp;
 }
 
-SNode* FindNodeData(SNode* pStart, int data)
+CNode* FindNodeData(CNode* pStart, int data)
 {
-	SNode* pNode = pStart;
+	CNode* pNode = pStart;
 
 	while (pNode != NULL && pNode->nData != data)
 	{
@@ -117,25 +113,24 @@ SNode* FindNodeData(SNode* pStart, int data)
 //	}
 //	return pStart;
 //}
-SNode* InsertNodeData(SNode* pStart, int data, int insert)
+CNode* InsertNodeData(CNode* pStart, int data, int insert)
 {
-	SNode* pNode = pStart;
-	SNode* pInsert = NULL;
+	CNode* pNode = pStart;
+	CNode* pInsert = NULL;
 
 	pNode = FindNodeData(pStart, data);
 
-	pInsert = new SNode();
+	pInsert = new CNode();
 	pInsert->nData = insert;
 	pInsert->pNext = pNode->pNext;
-	pInsert->pLast = pNode;
 	pNode->pNext = pInsert;
 	return pInsert;
 }
 
-void DeleteNodeData(SNode* pStart, int del)
+void DeleteNodeData(CNode* pStart, int del)
 {
-	SNode* pPre = NULL;
-	SNode* pNode = pStart;
+	CNode* pPre = NULL;
+	CNode* pNode = pStart;
 
 	while (pNode != NULL && pNode->nData != del)
 	{
@@ -147,15 +142,24 @@ void DeleteNodeData(SNode* pStart, int del)
 	{
 		if (pPre != NULL)
 			pPre->pNext = pNode->pNext;
-		pNode->pNext->pLast = pPre;
 		delete pNode;
 	}
 
 }
 
-void PrintLinkedList(SNode* pStart)
+//void CircularLinkedList(CNode* pStart)
+//{
+//	CNode* pNode = pStart;
+//	while (pNode->pNext != NULL && pNode->pNext != pStart)
+//	{
+//		pNode = pNode->pNext;
+//	}
+//	pNode->pNext = pStart;
+//}
+
+void PrintLinkedList(CNode* pStart)
 {
-	SNode* pNode = pStart;
+	CNode* pNode = pStart;
 	printf("data:");
 	while (pNode)
 	{
@@ -168,10 +172,10 @@ void PrintLinkedList(SNode* pStart)
 	printf("\n");
 }
 
-void DeleteLinkedList(SNode* pStart)
+void DeleteLinkedList(CNode* pStart)
 {
-	SNode* pNode = pStart;
-	SNode* pDel = NULL;
+	CNode* pNode = pStart;
+	CNode* pDel = NULL;
 	while (pNode != NULL)
 	{
 		pDel = pNode;
@@ -183,8 +187,8 @@ void DeleteLinkedList(SNode* pStart)
 
 void InputAdd()
 {
-	SNode* pStart = NULL;
-	SNode* pNode = NULL;
+	CNode* pStart = NULL;
+	CNode* pNode = NULL;
 	int nData = 0;
 
 	//동적할당을 하면 프로그램이 사용자에 의해서 사용되는 메모리가 결정된다.

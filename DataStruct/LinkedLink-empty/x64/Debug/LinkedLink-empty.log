@@ -1,1 +1,3 @@
-﻿  LinkedLink-empty.vcxproj -> C:\Users\Administrator\Desktop\KCH\LinkedLink-empty\x64\Debug\LinkedLink-empty.exe
+﻿  Circular.cpp
+C:\Users\Administrator\Desktop\KCH\royoung\DataStruct\LinkedLink-empty\Circular.cpp(35,1): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  LinkedLink-empty.vcxproj -> C:\Users\Administrator\Desktop\KCH\royoung\DataStruct\LinkedLink-empty\x64\Debug\LinkedLink-empty.exe
